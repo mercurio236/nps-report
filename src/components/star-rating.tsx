@@ -7,6 +7,7 @@ type Props = {
   value?: number
   onChange?: (rating: number) => void
   size?: number
+  name?: string
 }
 
 export default function StarRating({
@@ -14,6 +15,7 @@ export default function StarRating({
   value,
   onChange,
   size = 28,
+  name
 }: Props) {
   const [hover, setHover] = useState<number | null>(null)
   const [rating, setRating] = useState<number>(value || 0)
@@ -32,6 +34,7 @@ export default function StarRating({
         return (
           <svg
             key={score}
+            name={name}
             onMouseEnter={() => setHover(score)}
             onMouseLeave={() => setHover(null)}
             onClick={() => handleClick(score)}
