@@ -30,9 +30,40 @@ const dateNpsCompany = [
   { company: 'Empresa B', date: '2025-03-01', nps: 38 },
 ]
 
+const responseData = [
+  {
+    id: 'a1',
+    nameCompany: 'Empresa A',
+    responseCompany:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sunt unde delectus quia! Minima itaque molestias dolores recusandae maiores obcaecati! Omnis harum fugit explicabo nam, sunt blanditiis ipsum sequi fugiat.',
+    avaliationStars: 3,
+  },
+  {
+    id: 'a2',
+    nameCompany: 'Empresa B',
+    responseCompany:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sunt unde delectus quia! Minima itaque molestias dolores recusandae maiores obcaecati! Omnis harum fugit explicabo nam, sunt blanditiis ipsum sequi fugiat.',
+    avaliationStars: 2,
+  },
+  {
+    id: 'a3',
+    nameCompany: 'Empresa B',
+    responseCompany:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sunt unde delectus quia! Minima itaque molestias dolores recusandae maiores obcaecati! Omnis harum fugit explicabo nam, sunt blanditiis ipsum sequi fugiat.',
+    avaliationStars: 1,
+  },
+  {
+    id: 'a4',
+    nameCompany: 'Empresa B',
+    responseCompany:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sunt unde delectus quia! Minima itaque molestias dolores recusandae maiores obcaecati! Omnis harum fugit explicabo nam, sunt blanditiis ipsum sequi fugiat.',
+    avaliationStars: 2,
+  },
+]
+
 export default function ReportsPage() {
   return (
-    <ReportLayout>
+    <ReportLayout data={responseData}>
       <NpsRadarCompanies rows={companies} />
       <NpsTrendLine rows={dateNpsCompany} />
     </ReportLayout>
