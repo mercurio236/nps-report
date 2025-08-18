@@ -8,27 +8,27 @@ import StarRating from './star-rating'
 
 export type DataCompanyProps = {
   id: number
-  nameCompany: string
-  avaliation: string
-  stars: number
+  name: string
+  description: string
+  starsRounded: number
 }
 
 export function CardCompany({
-  nameCompany,
-  avaliation,
-  stars,
+  name,
+  description,
+  starsRounded,
   id,
 }: DataCompanyProps) {
   const router = useRouter()
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{nameCompany}</CardTitle>
+        <CardTitle>{name}</CardTitle>
       </CardHeader>
-      <CardContent>{avaliation}</CardContent>
+      <CardContent>{description}</CardContent>
       <Separator />
       <CardFooter className="flex justify-between">
-        <StarRating value={stars} />
+        <StarRating value={starsRounded} />
         <Button
           onClick={() => router.push(`/avaliate-company/${id}`)}
           variant="company"

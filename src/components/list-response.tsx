@@ -10,12 +10,12 @@ export function ListReponse({ data }: ListResponseProps) {
     <div className="h-96 overflow-y-auto border rounded-sm">
       {data &&
         data.map((response) => (
-          <div key={response.id}>
+          <div key={response.companyId}>
             <Response
-              avaliationStars={response.avaliationStars}
-              id={response.id}
-              nameCompany={response.nameCompany}
+              companyId={response.companyId}
+              company={response.company}
               responseCompany={response.responseCompany}
+              starsRounded={response.starsRounded}
             />
             <Separator />
           </div>

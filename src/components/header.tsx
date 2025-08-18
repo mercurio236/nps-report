@@ -1,4 +1,4 @@
-import { Building, ChartPie, Home } from 'lucide-react'
+import { Building, ChartPie, Home, PlusCircle } from 'lucide-react'
 import { Separator } from './ui/separator'
 import Link from 'next/link'
 
@@ -24,6 +24,13 @@ export function Header() {
           >
             <ChartPie className="h-4 w-4" />
             Relatórios
+          </Link>
+          <Link
+            href="/create-company-avaliation"
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground data-[current=true]:text-foreground"
+          >
+            <PlusCircle className="h-4 w-4" />
+            Criar empresa
           </Link>
         </nav>
       </div>

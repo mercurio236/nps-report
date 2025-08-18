@@ -1,22 +1,22 @@
 import StarRating from './star-rating'
 
 export interface ResponseProps {
-  id: string
-  nameCompany: string
+  companyId: string
+  company: string
   responseCompany: string
-  avaliationStars: number
+  starsRounded: number
 }
 
 export function Response({
-  nameCompany,
-  avaliationStars,
+  company,
   responseCompany,
+  starsRounded
 }: ResponseProps) {
   return (
     <div className='p-5'>
       <div className='flex justify-between'>
-        <p className='font-bold text-[18px]'>{nameCompany}</p>
-        <StarRating value={avaliationStars} />
+        <p className='font-bold text-[18px]'>{company}</p>
+        <StarRating value={starsRounded} />
       </div>
       <section>{responseCompany}</section>
     </div>

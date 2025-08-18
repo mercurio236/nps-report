@@ -11,9 +11,9 @@ export function ListCompany({ data }: ListCompanyProps) {
         data.map((company) => (
           <div key={company.id} className="mb-4">
             <CardCompany
-              nameCompany={company.nameCompany}
-              avaliation={company.avaliation}
-              stars={company.stars}
+              name={company.name}
+              description={company.description}
+              starsRounded={company.starsRounded}
               id={company.id}
             />
           </div>

@@ -5,45 +5,40 @@ import { useForm } from 'react-hook-form'
 import z from 'zod'
 import { Card, CardContent, CardFooter } from './ui/card'
 import { Button } from './ui/button'
-import StarRating from './star-rating'
 import { Label } from './ui/label'
 import { Textarea } from './ui/textarea'
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from './ui/form'
-import { toast } from 'sonner'
+import { Input } from './ui/input'
 import { api } from '@/services/api'
-import { redirect, useParams } from 'next/navigation'
+import { toast } from 'sonner'
+import { redirect } from 'next/navigation'
 
 const avaliationSchema = z.object({
-  companyId: z.string(),
-  stars: z.number({ error: 'Campo obrigátorio' }).min(0).max(5),
-  comment: z.string().optional(),
+  name: z.string({ error: 'Campo obrigatorio.' }),
+  description: z.string({ error: 'Campo obrigatorio' }),
+  stars: z.number().default(0).optional(),
 })
 
 type AvaliationSchemaProps = z.infer<typeof avaliationSchema>
 
-export function FormAvaliation() {
-  const params = useParams<{ id: string }>()
-  const companyId = params.id ?? ''
-
+export function FormCreateComapany() {
   const form = useForm<AvaliationSchemaProps>({
     resolver: zodResolver(avaliationSchema),
     defaultValues: {
-      companyId,
       stars: 0,
-      comment: '',
     },
   })
 
   async function handleSubmitForm(data: AvaliationSchemaProps) {
     try {
-      const response = await api('/responses', {
+      const response = await api('/companies', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,13 +50,13 @@ export function FormAvaliation() {
         throw new Error('Erro ao cadastrar empresa')
       }
 
-      toast.success('Obrigato por sua avaliação')
+      toast.success('Empresa criada com sucesso')
       setTimeout(() => {
         redirect('/')
       }, 3000)
     } catch (err) {
       console.error(err)
-      toast.error('Erro ao avaliar empresa')
+      toast.error('Erro ao criar empresa')
     }
   }
 
@@ -72,26 +67,25 @@ export function FormAvaliation() {
           <CardContent className="flex flex-col gap-2">
             <FormField
               control={form.control}
-              name="stars"
+              name="name"
+              defaultValue=""
               render={({ field: { value, name, onChange } }) => (
                 <FormItem className="grid w-full max-w-sm items-center gap-3 mb-10">
-                  <Label>Quantas estrelas você avalia a empresa?</Label>
-                  <StarRating value={value} onChange={onChange} name={name} />
+                  <Label>Nome da empresa</Label>
+                  <Input value={value} name={name} onChange={onChange} />
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="comment"
+              name="description"
               render={({ field: { value, name, onChange } }) => (
                 <FormItem className="grid w-full max-w-sm items-center gap-3">
-                  <FormLabel htmlFor="comment">
-                    Deixe seu comentario (opcional)
-                  </FormLabel>
+                  <FormLabel htmlFor="description">Descrição</FormLabel>
                   <FormControl>
                     <Textarea
-                      id="comment"
+                      id="description"
                       name={name}
                       value={value}
                       onChange={onChange}
@@ -104,7 +98,7 @@ export function FormAvaliation() {
           </CardContent>
           <CardFooter>
             <Button variant="company" size="lg" type="submit">
-              Avaliar
+              Cadastrar
             </Button>
           </CardFooter>
         </Card>

@@ -16,26 +16,26 @@ import { ptBR } from 'date-fns/locale'
 import colors from 'tailwindcss/colors'
 import { Card, CardContent } from './ui/card'
 
-type Row = { company: string; date: string | Date; nps: number | null }
+type Row = { company: string; lastResponseAt: string | Date; nps: number | null }
 
 export default function NpsTrendLine({ rows }: { rows: Row[] }) {
   const companies = Array.from(new Set(rows.map((r) => r.company)))
 
-  type Bucket = { date: string; series: Record<string, number | null> }
+  type Bucket = { lastResponseAt: string; series: Record<string, number | null> }
 
   const map = rows.reduce<Record<string, Bucket>>((acc, r) => {
-    const d = r.date instanceof Date ? r.date : parseISO(String(r.date))
+    const d = r.lastResponseAt instanceof Date ? r.lastResponseAt : parseISO(String(r.lastResponseAt))
     if (!isValid(d)) return acc
 
     const key = format(d, 'yyyy-MM-dd')
-    if (!acc[key]) acc[key] = { date: key, series: {} }
+    if (!acc[key]) acc[key] = { lastResponseAt: key, series: {} }
     acc[key].series[r.company] = r.nps ?? null
     return acc
   }, {})
 
   const data = Object.values(map)
-    .sort((a, b) => compareAsc(parseISO(a.date), parseISO(b.date)))
-    .map((row) => ({ date: row.date, ...row.series }))
+    .sort((a, b) => compareAsc(parseISO(a.lastResponseAt), parseISO(b.lastResponseAt)))
+    .map((row) => ({ date: row.lastResponseAt, ...row.series }))
 
   const fmtDate = (iso: string) =>
     format(parseISO(iso), 'dd/MM', { locale: ptBR })
