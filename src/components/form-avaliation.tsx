@@ -9,12 +9,12 @@ import StarRating from './star-rating'
 import { Label } from './ui/label'
 import { Textarea } from './ui/textarea'
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from './ui/form'
 import { toast } from 'sonner'
 import { api } from '@/services/api'
@@ -55,13 +55,19 @@ export function FormAvaliation() {
         throw new Error('Erro ao cadastrar empresa')
       }
 
-      toast.success('Obrigato por sua avaliação')
+      toast.success('Obrigato por sua avaliação', {
+        richColors: true,
+        position: 'top-left',
+      })
       setTimeout(() => {
         redirect('/')
       }, 3000)
     } catch (err) {
       console.error(err)
-      toast.error('Erro ao avaliar empresa')
+      toast.error('Erro ao avaliar empresa', {
+        richColors: true,
+        position: 'top-left',
+      })
     }
   }
 
@@ -85,7 +91,7 @@ export function FormAvaliation() {
               control={form.control}
               name="comment"
               render={({ field: { value, name, onChange } }) => (
-                <FormItem className="grid w-full max-w-sm items-center gap-3">
+                <FormItem className="grid w-full items-center gap-3">
                   <FormLabel htmlFor="comment">
                     Deixe seu comentario (opcional)
                   </FormLabel>

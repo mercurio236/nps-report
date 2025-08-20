@@ -50,13 +50,19 @@ export function FormCreateComapany() {
         throw new Error('Erro ao cadastrar empresa')
       }
 
-      toast.success('Empresa criada com sucesso')
+      toast.success('Empresa criada com sucesso', {
+        richColors: true,
+        position: 'top-left',
+      })
       setTimeout(() => {
         redirect('/')
       }, 3000)
     } catch (err) {
       console.error(err)
-      toast.error('Erro ao criar empresa')
+      toast.error('Erro ao criar empresa', {
+        richColors: true,
+        position: 'top-left',
+      })
     }
   }
 
